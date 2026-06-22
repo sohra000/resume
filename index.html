@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .resume-card {
+            background-color: #161b22;
+            width: 100%;
+            max-width: 650px;
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .profile-section {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        .avatar-perspective {
+            perspective: 1000px;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.3s ease; 
+            transform-style: preserve-3d;
+        }
+        .profile-info h1 {
+            color: #ffffff;
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .profile-info .status {
+            color: #58a6ff;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .resume-details {
+            border-top: 1px solid #21262d;
+            padding-top: 20px;
+        }
+        .resume-details h2 {
+            color: #f0f6fc;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .resume-details p {
+            line-height: 1.6;
+            font-size: 15px;
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+        .card-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #21262d;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #21262d;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .tg-link:hover {
+            background-color: #1f6feb;
+            transform: translateY(-2px);
+        }
+        .tg-link svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+        @media (max-width: 500px) {
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-card">
+        <div class="profile-section">
+            <div class="avatar-perspective">
+                <img 
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCNJjNJm84qdX-P8KWfblGvwS5SnFlUJ7ia5mMQQJnkRoW3SeJ-6hJTOI&s=10" 
+                    alt="Фото профиля" 
+                    class="avatar"
+                    id="tilt-avatar"
+                >
+            </div>
+            <div class="profile-info">
+                <h1>Sohra</h1>
+                <div class="status">Frontend Developer</div>
+                <p style="margin: 0; color: #8b949e;">Создатель хайпа.</p>
+            </div>
+        </div>
+
+        <div class="resume-details">
+            <h2>О себе</h2>
+            <p>Простак</p>
+            <h2>Навыки</h2>
+            <p>HTML, CSS, Python</p>
+        </div>
+        <div class="card-footer">
+            <a href="https://t.me/quesfer" target="_blank" class="tg-link" title="Написать мне в Telegram">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.98-.74 3.82-1.66 6.37-2.75 7.63-3.28 3.62-1.5 4.37-1.76 4.86-1.77.11 0 .35.03.51.16.13.1.17.24.19.34.02.07.02.21.01.29z"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+    <script>
+        const avatar = document.getElementById('tilt-avatar');
+        avatar.addEventListener('mousemove', (e) => {
+            const rect = avatar.getBoundingClientRect();
+            const x = e.clientX - rect.left - (rect.width / 2);
+            const y = e.clientY - rect.top - (rect.height / 2);
+            const maxTilt = 20; 
+            const tiltX = -(y / (rect.height / 2)) * maxTilt;
+            const tiltY = (x / (rect.width / 2)) * maxTilt;
+            avatar.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
+        });
+        avatar.addEventListener('mouseleave', () => {
+            avatar.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+    </script>
+</body>
+</html>
